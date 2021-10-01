@@ -9,23 +9,27 @@ export const signIn = async (req, res) => {
     //2.Check the password is matching or not
     //3.If not match password then return
 
-    const existingUser = await checkUserExist(email);
+    const userValid = await checkUserExist(email);
 
-    if (!existingUser)
+    if (!userValid)
       return res.status(404).json({ message: "user doesn't exist." });
 
     const isPasswordCorrect = await bcrypt.compare(
       password,
-      existingUser.password
+      userValid.password
     );
 
     if (!isPasswordCorrect)
       return res.status(404).json({ message: "Invalid credentials." });
 
-    const token = userJWTToken(existingUser?.email, existingUser?._id);
+    const token = userJWTToken(userValid?.email, userValid?._id);
 
     res.status(201).json({
-      userInfo: { name: existingUser.name, email: existingUser.email },
+      userInfo: {
+        id: userValid._id,
+        name: userValid.name,
+        email: userValid.email,
+      },
       token,
     });
   } catch (error) {
@@ -55,7 +59,7 @@ export const signUp = async (req, res) => {
     const token = userJWTToken(result?.email, result?._id);
 
     res.status(200).json({
-      userInfo: { name: result.name, email: result.email },
+      userInfo: { id: result._id, name: result.name, email: result.email },
       token,
     });
   } catch (error) {
