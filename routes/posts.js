@@ -1,6 +1,6 @@
 // In this We will add all the route which is related to Post.
 import express from "express";
-import auth from "../middleware/auth.js";
+import requireAuth from "../middleware/auth.js";
 const router = express.Router();
 
 import {
@@ -12,9 +12,9 @@ import {
 } from "../controller/post.js";
 
 router.get("/", getPost);
-router.post("/", auth, createPost);
-router.patch("/:id", auth, updatePost);
-router.delete("/:id", auth, deletePost);
-router.patch("/:id/LikePost", auth, likePost);
+router.post("/", requireAuth, createPost);
+router.patch("/:id", requireAuth, updatePost);
+router.delete("/:id", requireAuth, deletePost);
+router.patch("/:id/LikePost", requireAuth, likePost);
 
 export default router;
