@@ -24,7 +24,10 @@ export const signIn = async (req, res) => {
 
     const token = userJWTToken(existingUser?.email, existingUser?._id);
 
-    res.status(200).json({ result: existingUser, token });
+    res.status(201).json({
+      userInfo: { name: existingUser.name, email: existingUser.email },
+      token,
+    });
   } catch (error) {
     res.status(500).json({ message: "Something went wrong" });
   }
@@ -50,8 +53,11 @@ export const signUp = async (req, res) => {
     });
 
     const token = userJWTToken(result?.email, result?._id);
-    
-    res.status(200).json({ result, token });
+
+    res.status(200).json({
+      userInfo: { name: result.name, email: result.email },
+      token,
+    });
   } catch (error) {
     res.status(500).json({ message: "Something went wrong" });
   }
