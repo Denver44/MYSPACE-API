@@ -73,3 +73,20 @@ export const likePost = async (req, res) => {
   });
   res.json(updatedPost);
 };
+
+// test route for API
+export const testPost = async (req, res) => {
+  try {
+    const fakePostData = {
+      title: "be Patient",
+      message: "post route working fine",
+      name: "Vercel",
+      creator: "Denver",
+      tags: ["vecel", "github"],
+      selectedFile: "C:/images/vercel.png",
+    };
+    res.status(200).json(fakePostData);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};

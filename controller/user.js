@@ -66,3 +66,19 @@ export const signUp = async (req, res) => {
     res.status(500).json({ message: "Something went wrong" });
   }
 };
+
+export const testUser = async (req, res) => {
+  try {
+    const fakeUserData = {
+      title: "be Patient",
+      message: "user route working fine",
+      name: "Vercel",
+      creator: "Denver",
+      tags: ["vecel", "github"],
+      selectedFile: "C:/images/vercel.png",
+    };
+    res.status(200).json(fakeUserData);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
