@@ -9,9 +9,11 @@ import {
   updatePost,
   deletePost,
   likePost,
+  testPost,
 } from "../controller/post.js";
 
 router.get("/", getPost);
+router.get("/test", testPost);
 router.post("/", requireAuth, createPost);
 router.patch("/:id", requireAuth, updatePost);
 router.delete("/:id", requireAuth, deletePost);
