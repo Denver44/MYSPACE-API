@@ -1,15 +1,6 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "./index.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "./(.*)",
-      "dest": "/"
-    }
-  ]
+  "name": "my-space-api-denver44.vercel.app",
+  "builds": [{ "src": "script.js", "use": "@vercel/node" }],
+  "routes": [{ "src": "/(.*)", "dest": "/index.js" }]
 }
